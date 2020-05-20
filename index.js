@@ -1,10 +1,10 @@
-
-const addButton=document.getElementById(`add`);
-    addButton.onclick=function({
-    refreshIndex();
-    const priorityValue=document.schedule_data.priority.value;
-    const scheduleName=document.schedule_data.schedule.value;
-    const limitName=document.schedule_data.limit.value;
-    const table=document.getElementById(`ToDo`);
-    let row 
-    })
+function submitItem() {
+    var todoItems = [];
+    var todoItem = document.getElementById('item').value;
+    todoItems.push(todoItem);
+    for (var i =0; i < todoItems.length; i++) {
+      var li = document.createElement('li');
+      li.textContent = todoItems[i]
+      document.getElementById('todoList').appendChild(li);
+    }
+  }
