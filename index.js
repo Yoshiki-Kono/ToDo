@@ -1,13 +1,13 @@
 `use strict`;
 
-const addToDoTask=document.getElementsByClassName(`ToDoTask`);
-const completerButton=document.getElementById(`complete`);
-const schduleForm=document.getElementById(`schedule`);
+const addToDoTask=document.getElementsByClassName(`ToDoTask`)[0];
+const completeButton=document.getElementById(`complete`);
+const scheduleForm=document.getElementById(`schedule`);
 const limitForm=document.getElementById(`limit`);
 
-const Task=deleteButton=> {
+const deleteTask=deleteButton=> {
     const plusTask=deleteButton.closest(`li`);
-    scheduleForm.limitForm.removeChild(Task);
+    scheduleForm.limitForm.removeChild(plusTask);
 };
 
 const plusTask=Task=> {
@@ -20,6 +20,13 @@ const plusTask=Task=> {
     taskObj.innerText=Task;
 
     taskObj.append(deleteButton);
-    completerButton.appendChild(taskObj);
+    completeButton.appendChild(taskObj);
 };
 
+addToDoTask.addEventListener(`click`, event=>){
+    const Task=schduleForm.Value;
+    const Task=limitForm.Value;
+    plusTask(Task);
+    scheduleForm.Value=``;
+    limitForm.value=``;
+});
