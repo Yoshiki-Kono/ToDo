@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-        <meta charset="UTF-8">
-        <title>ToDo app</title>
-</head>
-<body>
-    <div class="container">
-        <header class="addTodo">
-            <h1 class="headerTitle">ToDo app</h1>
-        </header>
-                <h2>新規予定を登録する</h2>
-                <div>
-                    <input type="text" name="content" class="form-control" required placeholder="予定を入力">
-                    <input type="text" name="content" class="form-control" required placeholder="日付を入力">
-                    <input type="submit" class="btn btn-primary" value="登録">
-                </div>
-                <h2>現在登録されている予定</h2>
+　<head>
+    <meta charset="UTF-8">
+　　<title>ToDo app</title>
+　</head>
 
+　<body>
+    <header class="header">
+        <h1 class="title">ToDo app</h1>
+    </header>
+    　<h2>現在登録されている予定</h2>
+
+
+      <h2>新規予定を登録する</h2>
+      <ul class="ToDoTask"></ul>
+        <form>
+            <input type="text" name="schedule" required placeholder="予定を入力">
+            <input type="text" name="limit" required placeholder="期限を入力">
+            <button type="button" name="complete" class="btn btn-primary">登録</button>
+        </form>
 
         <small>Copyright (c) Yoshiki /Global Sense ltd All Right Reserved. </small>
 
-        <ul id="todoList"></ul>
-        <script src="home/index.js"></script>
-</body>
+    <script src="index.js"></script>
+　</body>
 </html>
