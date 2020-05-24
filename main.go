@@ -12,7 +12,7 @@ import (
 
 type todoList []todo
 
-var db *sql.DB
+var dbConn *sql.DB
 
 //構造体一覧
 type todo struct {
@@ -35,8 +35,8 @@ func main() {
 		fmt.Println(err.Error())
 		return
 	}
-	db = db
-	http.Handle("/", http.FileServer(http.Dir("todo")))
+	dbConn = db
+	http.Handle("/", http.FileServer(http.Dir("indexToDo")))
 	http.HandleFunc("/register", register)
 	http.HandleFunc("/display", display)
 	http.HandleFunc("/remove", remove)
@@ -45,13 +45,13 @@ func main() {
 
 //予定登録時の処理
 func register(w http.ResponseWriter, r *http.Request) {
-	form := todo{}
 	db, err := sql.Open("mysql", "root:0111@/todo")
 	if err != nil {
 		return
 	}
 	defer db.Close()
 
+	form := todo{}
 	if err := json.NewDecoder(r.Body).Decode(&form); err != nil {
 		http.Error(w, err.Error(), 400)
 		return
@@ -60,7 +60,7 @@ func register(w http.ResponseWriter, r *http.Request) {
 	schedule := form.Schedule
 	timeLimit := form.TimeLimit
 
-	stmt, err := db.Prepare("INSERT INTO trn_todo(schedule, timelimit) VALUES(?,?)")
+	stmt, err := dbConn.Prepare("INSERT INTO trn_todo(schedule, timelimit) VALUES(?,?)")
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return
@@ -76,14 +76,14 @@ func register(w http.ResponseWriter, r *http.Request) {
 
 //DBの内容を一覧表示させる
 func display(w http.ResponseWriter, r *http.Request) {
-	todoList := todoList{}
 	db, err := sql.Open("mysql", "root:0111@/todo")
 	if err != nil {
 		return
 	}
 	defer db.Close()
 
-	rows, err := db.Query("SELECT id, schedule, timelimit FROM trn_todo")
+	todoList := todoList{}
+	rows, err := dbConn.Query("SELECT id, schedule, timelimit FROM trn_todo")
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return
@@ -111,14 +111,13 @@ func display(w http.ResponseWriter, r *http.Request) {
 }
 
 func remove(w http.ResponseWriter, r *http.Request) {
-	form := todo{}
-
 	db, err := sql.Open("mysql", "root:0111@/todo")
 	if err != nil {
 		return
 	}
 	defer db.Close()
 
+	form := todo{}
 	if err := json.NewDecoder(r.Body).Decode(&form); err != nil {
 		http.Error(w, err.Error(), 400)
 		return
@@ -126,7 +125,7 @@ func remove(w http.ResponseWriter, r *http.Request) {
 
 	targetID := form.ID
 
-	stmt, err := db.Prepare("DELETE FROM trn_todo WHERE id = ?")
+	stmt, err := dbConn.Prepare("DELETE FROM trn_todo WHERE id = ?")
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return
