@@ -4,14 +4,13 @@ const completeButton = document.getElementById('complete');
 const scheduleForm = document.getElementById('schedule');
 const limitForm = document.getElementById('limit');
 
-
 //DBの方へ登録するデータを送る
 completeButton.onclick = function() {
     const form = {};
     form.scheduleForm = scheduleForm.value;
     form.limitform = limitForm.value;
     const JsonData = JSON.stringify(form);
-    fetch("/register",{
+    fetch("/register", {
         method : "post",
         body : JsonData
     }).then(response => {
@@ -35,9 +34,9 @@ function getTodoList() {
           table.deleteRow(0);
         }
         todoList.forEach(function(element) {
-        let schedule = element.scheduleForm;
-        let timeLimit = element.limitForm;
         let id = element.id;
+        let schedule = element.schedule;
+        let timeLimit = element.timeLimit;
         let row = table.insertRow(-1);
         let cell = row.insertCell(-1);
         let text = document.createTextNode(schedule);
@@ -58,10 +57,10 @@ function getTodoList() {
 
 //DBから削除したデータを受け取る
 function deleteTodo(event) {
-    const val = event.target.vulue;
+    const val = event.target.value;
     const form = { id : val };
     const JsonData = JSON.stringify(form);
-    fetch("/deleteTodo" , {
+    fetch("/remove" , {
         method : "post",
         body : JsonData
     }).then(response => {
