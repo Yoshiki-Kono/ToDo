@@ -7,8 +7,8 @@ const limitForm = document.getElementById('limit');
 //DBの方へ登録するデータを送る
 completeButton.onclick = function() {
     const form = {};
-    form.scheduleForm = scheduleForm.value;
-    form.limitform = limitForm.value;
+    form.schedule = scheduleForm.value;
+    form.timelimit = limitForm.value;
     const JsonData = JSON.stringify(form);
     fetch("/register", {
         method : "post",
@@ -36,13 +36,13 @@ function getTodoList() {
         todoList.forEach(function(element) {
         let id = element.id;
         let schedule = element.schedule;
-        let timeLimit = element.timeLimit;
+        let timelimit = element.timeLimit;
         let row = table.insertRow(-1);
         let cell = row.insertCell(-1);
         let text = document.createTextNode(schedule);
         cell.appendChild(text);
         cell = row.insertCell(-1);
-        text = document.createTextNode(timeLimit);
+        text = document.createTextNode(timelimit);
         cell.appendChild(text);
         cell = row.insertCell(-1);
         let button = document.createElement("button");
