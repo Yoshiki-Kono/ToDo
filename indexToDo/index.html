@@ -4,24 +4,54 @@
     <meta charset="UTF-8">
 　　<title>ToDo app</title>
 　</head>
+　<body>
+    <h2>新規予定を登録する</h2>
+     <table>
+         <tr>
+             <td>予定</td><td><input type="text" id="schedule" required placeholder="予定を入力"></td>
+         </tr>
+         <tr>
+             <td>いつまで</td><td><input type="text" id="limit" required placeholder="期限を入力"></td>
+         </tr>
+         <tr>
+             <td><button onclick="createToDo()">登録</button></td>
+         </tr>
+     </table>
+     <hr>
+    　<h2>現在登録されている予定</h2>
+      <Table id=torokuyotei>
+      </Table>
+    <script src="index.js"></script>
+　</body>
+</html>
+
+<!-- #region
+
+<!DOCTYPE html>
+<html lang="ja">
+　<head>
+    <meta charset="UTF-8">
+　　<title>ToDo app</title>
+　</head>
 
 　<body>
     <header class="header">
         <h1 class="title">ToDo app</h1>
     </header>
-    　<h2>現在登録されている予定</h2>
-      <Table id=tourokuyotei></Table>
-
       <h2>新規予定を登録する</h2>
-    
+      <div class="container">
         <form>
             <input type="text" id="schedule" required placeholder="予定を入力">
             <input type="text" id="limit" required placeholder="期限を入力">
             <button type="button" id="complete" class="btn btn-primary">登録</button>
         </form>
-
+      <h2>現在登録されている予定</h2>
+      <div class="container"></div>
+      <Table id=tourokuyotei></Table>
         <small>Copyright (c) Yoshiki /Global Sense ltd All Right Reserved. </small>
 
     <script src="index.js"></script>
 　</body>
 </html>
+
+-->
