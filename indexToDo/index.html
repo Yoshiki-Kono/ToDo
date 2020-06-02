@@ -2,6 +2,7 @@
 <html lang="ja">
 　<head>
     <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 　　<title>ToDo app</title>
 　</head>
 
@@ -9,17 +10,25 @@
     <header class="header">
         <h1 class="title">ToDo app</h1>
     </header>
-      <h2>新規予定を登録する</h2>
-      <div class="container">
+    <h2>新規予定を登録する</h2>
+    <div id="todo">
         <form>
             <input type="text" id="schedule" required placeholder="予定を入力">
             <input type="text" id="limit" required placeholder="期限を入力">
             <button type="button" id="complete" class="btn btn-primary">登録</button>
         </form>
-      <h2>現在登録されている予定</h2>
-      <div class="container"></div>
-      <Table id=tourokuyotei></Table>
+        <h2>現在登録されている予定</h2>       
+        <table id=tourokuyotei>
+            <tr v-for="loopyotei in tourokuyotei">
+                <td>{{loopyotei.schedule}}</td>
+                <td>{{loopyotei.timeLimit}}</td>
+                <td>
+                    <button type="button">削除</button>
+                </td>
+            </tr>
+        </table>
         <small>Copyright (c) Yoshiki /Global Sense ltd All Right Reserved. </small>
+    </div>
 
     <script src="index.js"></script>
 　</body>

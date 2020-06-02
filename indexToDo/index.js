@@ -1,5 +1,29 @@
+const todo = new Vue({
+  el: '#todo',
+  data: {
+    tourokuyotei:[
+      {
+       schedule: '',
+       timeLimit:'',
+       id:''
+      }
+    ]
+  },
+  methods:{
+    display : onload = function(){
+      fetch("/display")
+      .then(response => {
+        if (response.status === 200) {
+          return response.json();
+        }
+      }).then(todoList => {
+        todo.tourokuyotei= todoList
+      });
+    }
+  }
+});
 
-window.onload = getTodoList();
+//window.onload = getTodoList();
 const completeButton = document.getElementById('complete');
 const scheduleForm = document.getElementById('schedule');
 const limitForm = document.getElementById('limit');
@@ -19,7 +43,8 @@ completeButton.onclick = function() {
         }
     });
 };
-//DBから表示する為のデータを受け取る
+
+/*DBから表示する為のデータを受け取る
 function getTodoList() {
     fetch("/display")
       .then(response => {
@@ -52,6 +77,8 @@ function getTodoList() {
           });
         });
 }
+*/
+
 //DBから削除したデータを受け取る
 function deleteTodo(event) {
     const val = event.target.value;
